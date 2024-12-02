@@ -4,7 +4,6 @@ namespace App\controllers;
 
 class About
 {
-
     public function action($method)
     {
         switch ($method) {
