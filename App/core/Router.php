@@ -5,55 +5,82 @@ namespace App\core;
 class Router
 {
     const CONTROLLER_NAMESPACE = 'App\controllers\\';
+    private string $methodName = '';
+    private string $controllerName = '';
+    private array $request_uri = [];
+    private array $config = [];
+
+
+
+    public function __construct($config)
+    {
+        $this->config = $config;
+        $this->setRequestUri();
+        $this->setControllerName();
+        $this->setMathodName();
+
+    }
     public function run(): void
     {
+        $this->validate();
         $namespace = $this->getNamespace();
-        $method = $this->getMethod();
 
         if (!class_exists($namespace)) {
             $namespace = self::CONTROLLER_NAMESPACE . 'NotFound';
         }
 
         $controller = new $namespace();
-        $controller->action($method);
+        $controller->action($this->getMethodName());
     }
 
-    private function prepareControllersName(): array | string
+    private function setRequestUri(): void
     {
-        $result = 'Main';
-
         if (isset($_SERVER['REQUEST_URI'])) {
-            $result= explode("/", $_SERVER['REQUEST_URI']);
+            $this->request_uri = explode("/", $_SERVER['REQUEST_URI']);
         }
-
-        if (is_array($result) && empty($result[2])) {
-            $result = 'Main';
-        }
-
-        return $result;
     }
 
-    private function getNamespace(): string
+    private function setControllerName(): void
     {
-        $controllerName = $this->prepareControllersName();
-        if (is_string($controllerName)) {
-            $namespace = $controllerName;
+        if (isset($this->request_uri[2]) && !empty($this->request_uri[2])) {
+            $this->controllerName = $this->request_uri[2];
         } else {
-            $namespace = $controllerName[2];
+            $this->controllerName = 'Main';
         }
-
-        return self::CONTROLLER_NAMESPACE . ucfirst($namespace);
+    }
+    public function getControllerName(): string
+    {
+        return $this->controllerName;
+    }
+    private function setMathodName(): void
+    {
+        if (isset($this->request_uri[3])) {
+            $this->methodName = $this->request_uri[3];
+        } else {
+            $this->methodName = 'index';
+        }
     }
 
-    private function getMethod(): string
+    public function getMethodName(): string
     {
-        $controllerName = $this->prepareControllersName();
-        if (is_string($controllerName) || !isset($controllerName[3])) {
-            $methodName = 'index';
-        } else {
-            $methodName = $controllerName[3];
-        }
+        return lcfirst($this->methodName);
+    }
 
-        return lcfirst($methodName);
+    public function getNamespace(): string
+    {
+        return self::CONTROLLER_NAMESPACE . ucfirst($this->getControllerName());
+    }
+
+    private function validate(): void
+    {
+        $actionPath = ucfirst($this->getControllerName()) . '/' . lcfirst($this->getMethodName());
+        if (!isset($this->config[$actionPath])) {
+            $this->controllerName = 'NotFound';
+            $this->methodName = 'index';
+        } else {
+            $configArray = explode("/", $this->config[$actionPath]);
+            $this->controllerName = ucfirst($configArray[0]);
+            $this->methodName = lcfirst($configArray[1]);
+        }
     }
 }
