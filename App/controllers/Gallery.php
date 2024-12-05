@@ -18,12 +18,12 @@ class Gallery
                 $this->delete();
                 break;
             default:
-                $this->index();
+                $this->view();
                 break;
         }
     }
 
-    public function index()
+    public function view()
     {
         echo "Gallery index page";
     }

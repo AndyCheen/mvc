@@ -2,6 +2,8 @@
 
 namespace App\controllers;
 
+use App\core\Viewer;
+
 class Main
 {
 
@@ -25,7 +27,12 @@ class Main
 
     public function index()
     {
-        echo "Main index page";
+        $viewer = new Viewer();
+        $viewer->setData([
+            "title" => "Home",
+            "email" => 'addres@mail.com'
+        ]);
+        $viewer->includePublic();
     }
 
     public function create()
