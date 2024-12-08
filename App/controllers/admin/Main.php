@@ -1,10 +1,12 @@
 <?php
 
-namespace App\controllers;
+namespace App\controllers\admin;
 
-class Gallery
+use App\core\Viewer;
+use App\controllers\Controller;
+
+class Main extends Controller
 {
-
     public function action($method)
     {
         switch ($method) {
@@ -25,21 +27,25 @@ class Gallery
 
     public function view()
     {
-        echo "Gallery index page";
+        $this->data = [
+            "title" => "Home",
+            "email" => 'addres@mail.com'
+        ];
+        $this->adminView('main/view');
     }
 
     public function create()
     {
-        echo "Gallery create page";
+        $this->adminView('main/create');
     }
 
     public function update()
     {
-        echo "Gallery update page";
+        $this->adminView('main/update');
     }
 
     public function delete()
     {
-        echo "Gallery delete page";
+        $this->adminView('main/delete');
     }
 }

@@ -1,12 +1,10 @@
 <?php
 
-namespace App\controllers;
-
+namespace App\controllers\public;
 use App\core\Viewer;
-
-class Main
+use App\controllers\Controller;
+class About extends Controller
 {
-
     public function action($method)
     {
         switch ($method) {
@@ -20,33 +18,28 @@ class Main
                 $this->delete();
                 break;
             default:
-                $this->index();
+                $this->view();
                 break;
         }
     }
 
-    public function index()
+    public function view()
     {
-        $viewer = new Viewer();
-        $viewer->setData([
-            "title" => "Home",
-            "email" => 'addres@mail.com'
-        ]);
-        $viewer->includePublic();
+        $this->publicView('about/view');
     }
 
     public function create()
     {
-        echo "Main create page";
+        $this->publicView('about/create');
     }
 
     public function update()
     {
-        echo "Main update page";
+        $this->publicView('about/update');
     }
 
     public function delete()
     {
-        echo "Main delete page";
+        $this->publicView('about/delete');
     }
 }

@@ -10,14 +10,14 @@ class Viewer
     {
         $this->data = $data;
     }
-    public function includePublic(string $partName = 'main'): void
+    public function includePublic(string $partName = 'view'): void
     {
         extract($this->data);
-        include __DIR__ . "/../../public/templates/public.php";
+        include __DIR__ . "/../../views/templates/public.php";
     }
 
-    public function includeAdmin(): void
+    public function includeAdmin(string $partName = 'view'): void
     {
-        include __DIR__ . "/../../public/templates/admin.php";
+        include __DIR__ . "/../../views/templates/admin.php";
     }
 }

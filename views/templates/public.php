@@ -6,10 +6,16 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-<?php include __DIR__ . '/../parts/header.php' ?>
-<?php include __DIR__ . '/../parts/' . $partName .'.php' ?>
-<?php include __DIR__ . '/../parts/footer.php' ?>
+<?php include __DIR__ . '/../parts/public/header.php' ?>
+<?php include __DIR__ . '/../parts/public/' . $partName .'.php' ?>
+<?php include __DIR__ . '/../parts/public/footer.php' ?>
 </body>
 </html>

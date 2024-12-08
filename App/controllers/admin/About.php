@@ -1,8 +1,10 @@
 <?php
 
-namespace App\controllers;
+namespace App\controllers\admin;
 
-class About
+use App\core\Viewer;
+use App\controllers\Controller;
+class About extends Controller
 {
     public function action($method)
     {
@@ -17,28 +19,28 @@ class About
                 $this->delete();
                 break;
             default:
-                $this->index();
+                $this->view();
                 break;
         }
     }
 
-    public function index()
+    public function view()
     {
-        echo "About index page";
+        $this->adminView('about/view');
     }
 
     public function create()
     {
-        echo "About create page";
+        $this->adminView('about/create');
     }
 
     public function update()
     {
-        echo "About update page";
+        $this->adminView('about/update');
     }
 
     public function delete()
     {
-        echo "About delete page";
+        $this->adminView('about/delete');
     }
 }

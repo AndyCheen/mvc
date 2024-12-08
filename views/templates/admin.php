@@ -8,14 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<header>
-    Admin
-</header>
-<main>
-    Main
-</main>
-<footer>
-    footer
+<?php include __DIR__ . '/../parts/admin/header.php' ?>
+<?php include __DIR__ . '/../parts/admin/' . $partName .'.php' ?>
+<?php include __DIR__ . '/../parts/admin/footer.php' ?>
 </footer>
 </body>
 </html>
