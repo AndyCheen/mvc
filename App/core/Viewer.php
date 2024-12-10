@@ -18,6 +18,7 @@ class Viewer
 
     public function includeAdmin(string $partName = 'view'): void
     {
+        extract($this->data);
         include __DIR__ . "/../../views/templates/admin.php";
     }
 }

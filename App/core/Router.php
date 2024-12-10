@@ -26,22 +26,19 @@ class Router
     {
         $this->validate();
         $namespace = $this->getNamespace();
-        $method = $this->getMethod();
 
         if (!class_exists($namespace)) {
             $namespace = self::CONTROLLER_NAMESPACE . 'NotFound';
         }
 
         $controller = new $namespace();
-        $controller->action($method);
+        $controller->action($this->getMethodName());
     }
 
-    private function prepareControllersName(): array | string
+    private function setRequestUri(): void
     {
-        $result = 'Main';
-
         if (isset($_SERVER['REQUEST_URI'])) {
-            $result= explode("/", $_SERVER['REQUEST_URI']);
+            $this->request_uri = explode("/", $_SERVER['REQUEST_URI']);
         }
     }
 

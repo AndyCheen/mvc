@@ -1,4 +1,22 @@
 <main>
     <h2>Gallery view</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskto</p>
+   <table>
+       <tr>
+           <th>ID</th>
+           <th>Name</th>
+           <th>Image</th>
+           <th>Category name</th>
+           <th>Category id</th>
+       </tr>
+       <?php
+        foreach ($data as $galeryItem): ?>
+            <tr>
+                <td><?= $galeryItem['id'] ?></td>
+                <td><?= $galeryItem['name'] ?></td>
+                <td><?= $galeryItem['image'] ?></td>
+                <td><?= $galeryItem['categoryName'] ?></td>
+                <td><?= $galeryItem['categoryId'] ?></td>
+            </tr>
+       <?php endforeach; ?>
+   </table>
 </main>
