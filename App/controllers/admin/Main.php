@@ -1,10 +1,12 @@
 <?php
 
-namespace App\controllers;
+namespace App\controllers\admin;
 
-class Main
+use App\core\Viewer;
+use App\controllers\Controller;
+
+class Main extends Controller
 {
-
     public function action($method)
     {
         switch ($method) {
@@ -18,28 +20,32 @@ class Main
                 $this->delete();
                 break;
             default:
-                $this->index();
+                $this->view();
                 break;
         }
     }
 
-    public function index()
+    public function view()
     {
-        echo "Main index page";
+        $this->data = [
+            "title" => "Home",
+            "email" => 'addres@mail.com'
+        ];
+        $this->adminView('main/view');
     }
 
     public function create()
     {
-        echo "Main create page";
+        $this->adminView('main/create');
     }
 
     public function update()
     {
-        echo "Main update page";
+        $this->adminView('main/update');
     }
 
     public function delete()
     {
-        echo "Main delete page";
+        $this->adminView('main/delete');
     }
 }

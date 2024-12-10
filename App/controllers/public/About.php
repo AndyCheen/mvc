@@ -1,10 +1,10 @@
 <?php
 
-namespace App\controllers;
-
-class Gallery
+namespace App\controllers\public;
+use App\core\Viewer;
+use App\controllers\Controller;
+class About extends Controller
 {
-
     public function action($method)
     {
         switch ($method) {
@@ -18,28 +18,28 @@ class Gallery
                 $this->delete();
                 break;
             default:
-                $this->index();
+                $this->view();
                 break;
         }
     }
 
-    public function index()
+    public function view()
     {
-        echo "Gallery index page";
+        $this->publicView('about/view');
     }
 
     public function create()
     {
-        echo "Gallery create page";
+        $this->publicView('about/create');
     }
 
     public function update()
     {
-        echo "Gallery update page";
+        $this->publicView('about/update');
     }
 
     public function delete()
     {
-        echo "Gallery delete page";
+        $this->publicView('about/delete');
     }
 }

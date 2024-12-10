@@ -9,6 +9,7 @@ class Router
     private string $controllerName = '';
     private array $request_uri = [];
     private array $config = [];
+    private bool $admin = false;
 
 
 
@@ -16,6 +17,7 @@ class Router
     {
         $this->config = $config;
         $this->setRequestUri();
+        $this->setMode();
         $this->setControllerName();
         $this->setMathodName();
 
@@ -24,29 +26,37 @@ class Router
     {
         $this->validate();
         $namespace = $this->getNamespace();
+        $method = $this->getMethod();
 
         if (!class_exists($namespace)) {
             $namespace = self::CONTROLLER_NAMESPACE . 'NotFound';
         }
 
         $controller = new $namespace();
-        $controller->action($this->getMethodName());
+        $controller->action($method);
     }
 
-    private function setRequestUri(): void
+    private function prepareControllersName(): array | string
     {
+        $result = 'Main';
+
         if (isset($_SERVER['REQUEST_URI'])) {
-            $this->request_uri = explode("/", $_SERVER['REQUEST_URI']);
+            $result= explode("/", $_SERVER['REQUEST_URI']);
         }
     }
 
     private function setControllerName(): void
     {
-        if (isset($this->request_uri[2]) && !empty($this->request_uri[2])) {
-            $this->controllerName = $this->request_uri[2];
+        $elementNum = 2;
+        if ($this->isAdmin()) {
+            $elementNum = 3;
+        }
+        if (isset($this->request_uri[$elementNum]) && !empty($this->request_uri[$elementNum])) {
+            $this->controllerName = $this->request_uri[$elementNum];
         } else {
             $this->controllerName = 'Main';
         }
+
     }
     public function getControllerName(): string
     {
@@ -54,10 +64,14 @@ class Router
     }
     private function setMathodName(): void
     {
-        if (isset($this->request_uri[3])) {
-            $this->methodName = $this->request_uri[3];
+        $elementNum = 3;
+        if ($this->isAdmin()) {
+            $elementNum = 4;
+        }
+        if (isset($this->request_uri[$elementNum])) {
+            $this->methodName = lcfirst($this->request_uri[$elementNum]);
         } else {
-            $this->methodName = 'index';
+            $this->methodName = 'view';
         }
     }
 
@@ -68,19 +82,41 @@ class Router
 
     public function getNamespace(): string
     {
-        return self::CONTROLLER_NAMESPACE . ucfirst($this->getControllerName());
+        if ($this->isAdmin()) {
+            return self::CONTROLLER_NAMESPACE . 'admin\\' . ucfirst($this->getControllerName());
+        } else {
+            return self::CONTROLLER_NAMESPACE . 'public\\' . ucfirst($this->getControllerName());
+        }
     }
 
     private function validate(): void
     {
         $actionPath = ucfirst($this->getControllerName()) . '/' . lcfirst($this->getMethodName());
+
         if (!isset($this->config[$actionPath])) {
             $this->controllerName = 'NotFound';
-            $this->methodName = 'index';
+            $this->methodName = 'view';
         } else {
             $configArray = explode("/", $this->config[$actionPath]);
             $this->controllerName = ucfirst($configArray[0]);
             $this->methodName = lcfirst($configArray[1]);
+        }
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(bool $admin): void
+    {
+        $this->admin = $admin;
+    }
+
+    private function setMode()
+    {
+        if (lcfirst($this->request_uri[2]) === 'admin') {
+            $this->setAdmin(true);
         }
     }
 }
