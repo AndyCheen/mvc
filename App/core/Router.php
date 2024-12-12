@@ -38,7 +38,8 @@ class Router
     private function setRequestUri(): void
     {
         if (isset($_SERVER['REQUEST_URI'])) {
-            $this->request_uri = explode("/", $_SERVER['REQUEST_URI']);
+            $requestUri = explode("?", $_SERVER['REQUEST_URI']);
+            $this->request_uri = explode("/", $requestUri[0]);
         }
     }
 

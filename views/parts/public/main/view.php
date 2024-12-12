@@ -1,4 +1,14 @@
 <main>
-    <h2>Main view</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskto</p>
+    <h2>Main menu</h2>
+    <ul>
+        <li>
+            <a href="http://localhost:8888/site/about/view">About</a>
+        </li>
+        <li>
+            <a href="http://localhost:8888/site/main/view">Main</a>
+        </li>
+        <li>
+            <a href="http://localhost:8888/site/gallery/view">Gallery</a>
+        </li>
+    </ul>
 </main>

@@ -2,9 +2,10 @@
 
 namespace App\controllers\admin;
 
-use App\core\Viewer;
 use App\controllers\Controller;
-class About extends Controller
+use App\models\User as UserModel;
+
+class User extends Controller
 {
     public function action($method)
     {
@@ -26,21 +27,28 @@ class About extends Controller
 
     public function view()
     {
-        $this->adminView('about/view');
+        $model = new UserModel();
+        $this->data = ['data' => $model->getAllUsers()];
+
+        $this->adminView('user/view');
     }
 
     public function create()
     {
-        $this->adminView('about/create');
+        $this->adminView('user/create');
     }
 
     public function update()
     {
-        $this->adminView('about/update');
+        $model = new UserModel();
+        $this->data = ['data' => $model->getOneUser($_GET['id'])];
+
+        $this->adminView('user/update');
     }
 
     public function delete()
     {
-        $this->adminView('about/delete');
+        // Кодя для видалення сутності
+        header('Location: http://localhost:8888/site/admin/user/view');
     }
 }

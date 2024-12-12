@@ -2,13 +2,11 @@
 
 namespace App\controllers\admin;
 
-use App\core\Viewer;
 use App\controllers\Controller;
-use App\models\Gallery as GalleryModel;
+use App\models\Post as PostModel;
 
-class Gallery extends Controller
+class Post extends Controller
 {
-
     public function action($method)
     {
         switch ($method) {
@@ -29,32 +27,28 @@ class Gallery extends Controller
 
     public function view()
     {
-        $model = new GalleryModel();
-        $this->data = ['data' => $model->getAllGallery()];
+        $model = new PostModel();
+        $this->data = ['data' => $model->getAllPosts()];
 
-        $this->adminView('gallery/view');
+        $this->adminView('post/view');
     }
 
     public function create()
     {
-        $this->adminView('gallery/create');
+        $this->adminView('post/create');
     }
 
     public function update()
     {
-        $model = new GalleryModel();
+        $model = new PostModel();
+        $this->data = ['data' => $model->getOnePost($_GET['id'])];
 
-        if (!isset($_GET['id'])) {
-            $this->view();
-        } else {
-            $this->data = ['data' => $model->getOneGallery($_GET['id'])];
-            $this->adminView('gallery/update');
-        }
+        $this->adminView('post/update');
     }
 
     public function delete()
     {
         // Кодя для видалення сутності
-        header('Location: http://localhost:8888/site/admin/gallery/view');
+        header('Location: http://localhost:8888/site/admin/post/view');
     }
 }
