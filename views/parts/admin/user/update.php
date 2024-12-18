@@ -8,23 +8,18 @@
             </td>
         </tr>
         <tr>
-            <td>image</td>
+            <td>email</td>
             <td>
-                <input name="image" placeholder="text" value="<?= $data['image'] ?>">
+                <input name="email" placeholder="text" value="<?= $data['email'] ?>">
             </td>
         </tr>
         <tr>
-            <td>categoryName</td>
+            <td>role</td>
             <td>
-                <input name="categoryName" placeholder="text" value="<?= $data['categoryName'] ?>">
+                <input name="role" placeholder="int" value="<?= $data['role'] ?>">
             </td>
         </tr>
         <tr>
-            <td>categoryId</td>
-            <td>
-                <input name="categoryId" placeholder="int" value="<?= $data['categoryId'] ?>">
-            </td>
-        </tr>
         <tr>
             <td colspan="2">
                 <button type="submit">Save</button>

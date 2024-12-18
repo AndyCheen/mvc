@@ -11,20 +11,7 @@ class Gallery extends Controller
 
     public function action($method)
     {
-        switch ($method) {
-            case 'create':
-                $this->create();
-                break;
-            case 'update':
-                $this->update();
-                break;
-            case 'delete':
-                $this->delete();
-                break;
-            default:
-                $this->view();
-                break;
-        }
+        $this->view();
     }
 
     public function view()
@@ -33,20 +20,5 @@ class Gallery extends Controller
         $this->data = ['data' => $model->getAllGallery()];
 
         $this->publicView('gallery/view');
-    }
-
-    public function create()
-    {
-        $this->publicView('gallery/create');
-    }
-
-    public function update()
-    {
-        $this->publicView('gallery/update');
-    }
-
-    public function delete()
-    {
-        $this->publicView('gallery/delete');
     }
 }

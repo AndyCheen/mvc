@@ -9,20 +9,7 @@ class Main extends Controller
 {
     public function action($method)
     {
-        switch ($method) {
-            case 'create':
-                $this->create();
-                break;
-            case 'update':
-                $this->update();
-                break;
-            case 'delete':
-                $this->delete();
-                break;
-            default:
-                $this->view();
-                break;
-        }
+        $this->view();
     }
 
     public function view()
@@ -32,20 +19,5 @@ class Main extends Controller
             "email" => 'addres@mail.com'
         ];
         $this->adminView('main/view');
-    }
-
-    public function create()
-    {
-        $this->adminView('main/create');
-    }
-
-    public function update()
-    {
-        $this->adminView('main/update');
-    }
-
-    public function delete()
-    {
-        $this->adminView('main/delete');
     }
 }

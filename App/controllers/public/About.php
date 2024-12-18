@@ -1,8 +1,10 @@
 <?php
 
 namespace App\controllers\public;
+
 use App\core\Viewer;
 use App\controllers\Controller;
+
 class About extends Controller
 {
     public function action($method)
@@ -26,20 +28,5 @@ class About extends Controller
     public function view()
     {
         $this->publicView('about/view');
-    }
-
-    public function create()
-    {
-        $this->publicView('about/create');
-    }
-
-    public function update()
-    {
-        $this->publicView('about/update');
-    }
-
-    public function delete()
-    {
-        $this->publicView('about/delete');
     }
 }

@@ -27,25 +27,6 @@ class Main extends Controller
 
     public function view()
     {
-        $this->data = [
-            "title" => "Home",
-            "email" => 'addres@mail.com'
-        ];
         $this->publicView('main/view');
-    }
-
-    public function create()
-    {
-        $this->publicView('main/create');
-    }
-
-    public function update()
-    {
-        $this->publicView('main/update');
-    }
-
-    public function delete()
-    {
-        $this->publicView('main/delete');
     }
 }

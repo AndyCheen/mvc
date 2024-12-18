@@ -1,5 +1,5 @@
 <main>
-    <h2>Gallery view</h2>
+    <h2>Post view</h2>
     <a href="create">Create</a>
     <br>
     <?php
@@ -10,21 +10,19 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Category name</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>User_id</th>
             <th>Category id</th>
-            <th>Update</th>
-            <th>Delete</th>
         </tr>
         <?php
         foreach ($data as $galeryItem): ?>
             <tr>
                 <td><?= $galeryItem['id'] ?></td>
-                <td><?= $galeryItem['name'] ?></td>
-                <td><?= $galeryItem['image'] ?></td>
-                <td><?= $galeryItem['categoryName'] ?></td>
-                <td><?= $galeryItem['categoryId'] ?></td>
+                <td><?= $galeryItem['title'] ?></td>
+                <td><?= $galeryItem['content'] ?></td>
+                <td><?= $galeryItem['user_id'] ?></td>
+                <td><?= $galeryItem['category_id'] ?></td>
                 <td>
                     <a href="update?id=<?= $galeryItem['id'] ?>">Update</a>
                 </td>
