@@ -36,7 +36,7 @@ class Post
         $connect = new Connector();
         $insert = new Insert();
         $insert->setTableName('post');
-        $insert->setData([['a' => 1, 'b' => 4, 'c' => 3],['a' => 1, 'c' => 2, 'b' => 3], ['b' => 1, 'c' => 3, 'a' => 4]]);
+        $insert->setData([['a' => "1", 'b' => 4, 'c' => 3],['a' => "1", 'c' => 2, 'b' => 3], ['b' => 1, 'c' => 3, 'a' => 4]]);
         var_dump($insert->buildSql());
     }
 

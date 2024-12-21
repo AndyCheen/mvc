@@ -71,7 +71,19 @@ class Insert
                     throw new \Exception('Entities have different amount of fields');
                 }
                 // Якщо все добре то всі значення масивами пушу в $this->values
-                array_push($this->values, array_values($item));
+                $values = array_values($item);
+
+                //Якщо дані були передані в форматі тексту то поміщаємо значення в кавички
+                $newArrayValues = [];
+                foreach ($values as $value) {
+                    if (is_string($value)) {
+                        $newValue = "'" . $value . "'";
+                    } else {
+                        $newValue = $value;
+                    }
+                    $newArrayValues[] = $newValue;
+                }
+                array_push($this->values, array_values($newArrayValues));
             }
 
             // Відсортовую ключі першого елемента щоб вони були в тому ж порядку що і значення, і записую в $this->fields
