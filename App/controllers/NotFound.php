@@ -1,11 +1,10 @@
 <?php
 
-namespace App\controllers\admin;
-use App\controllers\Controller;
+namespace App\controllers;
 class NotFound extends Controller
 {
 
-    public function action($method)
+    public function view()
     {
         echo "<h3>Error 404. Page not found</h3>";
     }

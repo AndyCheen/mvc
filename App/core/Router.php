@@ -32,7 +32,13 @@ class Router
         }
 
         $controller = new $namespace();
-        $controller->action($this->getMethodName());
+        if (is_callable([$controller, $this->methodName])) {
+            $method = $this->methodName;
+            $controller->$method();
+        } else {
+            $controller->view();
+        }
+
     }
 
     private function setRequestUri(): void

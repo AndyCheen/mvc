@@ -2,6 +2,9 @@
 
 namespace App\models;
 
+use App\sql\Connector;
+use App\sql\Insert;
+
 class Post
 {
     private $post = [
@@ -28,6 +31,15 @@ class Post
         ],
     ];
 
+    public function __construct()
+    {
+        $connect = new Connector();
+        $insert = new Insert();
+        $insert->setTableName('post');
+        $insert->setData([['a' => 1, 'b' => 4, 'c' => 3],['a' => 1, 'c' => 2, 'b' => 3], ['b' => 1, 'c' => 3, 'a' => 4]]);
+        var_dump($insert->buildSql());
+    }
+
     public function getAllPosts()
     {
         return $this->post;
@@ -40,5 +52,10 @@ class Post
         }
 
         throw new \Exception('Post not found');
+    }
+
+    public function create(): void
+    {
+
     }
 }

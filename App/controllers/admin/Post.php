@@ -7,23 +7,6 @@ use App\models\Post as PostModel;
 
 class Post extends Controller
 {
-    public function action($method)
-    {
-        switch ($method) {
-            case 'create':
-                $this->create();
-                break;
-            case 'update':
-                $this->update();
-                break;
-            case 'delete':
-                $this->delete();
-                break;
-            default:
-                $this->view();
-                break;
-        }
-    }
 
     public function view()
     {
