@@ -7,10 +7,6 @@ use App\controllers\Controller;
 
 class Main extends Controller
 {
-    public function action($method)
-    {
-        $this->view();
-    }
 
     public function view()
     {

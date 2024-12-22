@@ -9,11 +9,6 @@ use App\models\Gallery as GalleryModel;
 class Gallery extends Controller
 {
 
-    public function action($method)
-    {
-        $this->view();
-    }
-
     public function view()
     {
         $model = new GalleryModel();
