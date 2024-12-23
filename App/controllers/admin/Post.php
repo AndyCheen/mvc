@@ -18,6 +18,10 @@ class Post extends Controller
 
     public function create()
     {
+        if (!empty($_POST)) {
+            $model = new PostModel();
+            $model->save(array_intersect_key(array_filter($_POST), $model->to_array()));
+        }
         $this->adminView('post/create');
     }
 

@@ -2,31 +2,18 @@
 
 namespace App\models;
 
+use App\sql\Insert;
+
 class User
 {
-    private $user = [
-        1 => [
-            'id' => 1,
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => 'admin',
-            'role' => 'admin'
-        ],
-        2 => [
-            'id' => 2,
-            'name' => 'user',
-            'email' => 'user@gmail.com',
-            'password' => 'user',
-            'role' => 'user'
-        ],
-        3 => [
-            'id' => 3,
-            'name' => 'user2',
-            'email' => 'user2@gmail.com',
-            'password' => 'user2',
-            'role' => 'user'
-        ]
-    ];
+
+    public int $id;
+    public string $name;
+    public string $email;
+    public string $password;
+    public int $role;
+    public string $created;
+    public string $updated;
 
     public function getAllUsers()
     {
@@ -40,5 +27,18 @@ class User
         }
 
         throw new \Exception('User not found');
+    }
+
+    public function save(array $data): void
+    {
+        $insert = new Insert();
+        $insert->setTableName('user');
+        $insert->setData($data);
+        $insert->execute();
+    }
+
+    public function to_array()
+    {
+        return get_class_vars(get_class($this));
     }
 }

@@ -11,14 +11,18 @@ class Gallery extends Controller
 
     public function view()
     {
-        $model = new GalleryModel();
-        $this->data = ['data' => $model->getAllGallery()];
+//        $model = new GalleryModel();
+//        $this->data = ['data' => $model->getAllGallery()];
 
         $this->adminView('gallery/view');
     }
 
     public function create()
     {
+        if (!empty($_POST)) {
+            $model = new GalleryModel();
+            $model->save(array_intersect_key($_POST, $model->to_array()));
+        }
         $this->adminView('gallery/create');
     }
 

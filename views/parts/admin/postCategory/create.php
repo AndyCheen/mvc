@@ -1,8 +1,7 @@
 <main>
     <h1>Admin tool</h1>
     <h2>PostCategory create</h2>
-    <form action="">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+    <form method="POST">
         <table>
             <tr>
                 <td>title</td>

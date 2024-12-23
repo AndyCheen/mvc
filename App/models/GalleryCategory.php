@@ -2,27 +2,14 @@
 
 namespace App\models;
 
+use App\sql\Insert;
+
 class GalleryCategory
 {
-
-    private array $galleryCategory = [
-        1 => [
-            'id' => 1,
-            'name' => 'name 1'
-        ],
-        2 => [
-            'id' => 2,
-            'name' => 'name 2'
-        ],
-        3 => [
-            'id' => 3,
-            'name' => 'name 3'
-        ],
-        4 => [
-            'id' => 4,
-            'name' => 'name 4'
-        ],
-    ];
+    public int $id;
+    public string $title;
+    public string $created;
+    public string $updated;
 
     public function getAllGalleryCategory(): array
     {
@@ -36,5 +23,18 @@ class GalleryCategory
         }
 
         throw new \Exception('id is absent');
+    }
+
+    public function save(array $data): void
+    {
+        $insert = new Insert();
+        $insert->setTableName('gallery_category');
+        $insert->setData($data);
+        $insert->execute();
+    }
+
+    public function to_array()
+    {
+        return get_class_vars(get_class($this));
     }
 }

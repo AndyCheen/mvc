@@ -1,31 +1,30 @@
 <main>
     <h1>Admin tool</h1>
-    <h2>User view</h2>
-    <form action="">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+    <h2>User create</h2>
+    <form method="POST">
         <table>
             <tr>
-                <td>title</td>
+                <td>name</td>
                 <td>
                     <input name="name" placeholder="text"">
                 </td>
             </tr>
             <tr>
-                <td>content</td>
+                <td>email</td>
                 <td>
                     <input name="email" placeholder="text"">
                 </td>
             </tr>
             <tr>
-                <td>user_id</td>
+                <td>role</td>
                 <td>
                     <input name="role" placeholder="int"">
                 </td>
             </tr>
             <tr>
-                <td>category_id</td>
+                <td>password</td>
                 <td>
-                    <input name="password" placeholder="int"">
+                    <input name="password" placeholder="text"">
                 </td>
             </tr>
             <tr>

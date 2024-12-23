@@ -1,13 +1,20 @@
 <main>
     <h1>Admin tool</h1>
-    <h2>Gallery view</h2>
-    <form action="">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+    <h2>Gallery create</h2>
+    <form method="POST">
         <table>
             <tr>
-                <td>name</td>
+                <td>title</td>
                 <td>
-                    <input name="name" placeholder="text"">
+                    <input name="title" placeholder="text"">
+                </td>
+                <td>image</td>
+                <td>
+                    <input name="image" placeholder="text"">
+                </td>
+                <td>category_id</td>
+                <td>
+                    <input name="category_id" placeholder="text"">
                 </td>
             </tr>
             <tr>

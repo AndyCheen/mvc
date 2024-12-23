@@ -3,16 +3,18 @@
 namespace App\sql;
 
 use App\sql\Connector;
+use PDO;
 
 class Insert
 {
     private string $tabelName;
     private array $fields = [];
     private array $values = [];
+    private PDO $connect;
 
     public function __construct()
     {
-        $connect = new Connector();
+        $this->connect = (new Connector())->connect();
     }
 
     public function setTableName(string $tableName): void
@@ -22,7 +24,7 @@ class Insert
 
     public function buildSql(): string
     {
-        return 'INSERT INTO ' . $this->tabelName . ' (' . implode(', ', $this->fields) . ') VALUES ' . $this->getValues();
+        return 'INSERT INTO ' . $this->tabelName . ' (' . implode(', ', $this->fields) . ') VALUES ' . $this->getValues() . ' ' . (new Where('id', '=', '34'))->getWhere();
     }
 
     private function checkFloors(): bool
@@ -71,19 +73,7 @@ class Insert
                     throw new \Exception('Entities have different amount of fields');
                 }
                 // Якщо все добре то всі значення масивами пушу в $this->values
-                $values = array_values($item);
-
-                //Якщо дані були передані в форматі тексту то поміщаємо значення в кавички
-                $newArrayValues = [];
-                foreach ($values as $value) {
-                    if (is_string($value)) {
-                        $newValue = "'" . $value . "'";
-                    } else {
-                        $newValue = $value;
-                    }
-                    $newArrayValues[] = $newValue;
-                }
-                array_push($this->values, array_values($newArrayValues));
+                array_push($this->values, array_values($this->stringValuesToString($item)));
             }
 
             // Відсортовую ключі першого елемента щоб вони були в тому ж порядку що і значення, і записую в $this->fields
@@ -91,7 +81,29 @@ class Insert
             $this->fields = $etalonKeys;
         } else {
             $this->fields = array_keys($data);
-            $this->values = array_values($data);
+            $this->values = $this->stringValuesToString($data);
         }
+    }
+
+    private function stringValuesToString($data)
+    {
+        $values = array_values($data);
+
+        //Якщо дані були передані в форматі тексту то поміщаємо значення в кавички
+        $newArrayValues = [];
+        foreach ($values as $value) {
+            if (true) {
+                $newValue = "'" . $value . "'";
+            } else {
+                $newValue = $value;
+            }
+            $newArrayValues[] = $newValue;
+        }
+        return $newArrayValues;
+    }
+
+    public function execute()
+    {
+        $this->connect->query($this->buildSql());
     }
 }
