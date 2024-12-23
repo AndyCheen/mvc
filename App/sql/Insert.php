@@ -24,7 +24,7 @@ class Insert
 
     public function buildSql(): string
     {
-        return 'INSERT INTO ' . $this->tabelName . ' (' . implode(', ', $this->fields) . ') VALUES ' . $this->getValues() . ' ' . (new Where('id', '=', '34'))->getWhere();
+        return 'INSERT INTO ' . $this->tabelName . ' (' . implode(', ', $this->fields) . ') VALUES ' . $this->getValues();
     }
 
     private function checkFloors(): bool
