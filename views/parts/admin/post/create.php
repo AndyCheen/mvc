@@ -1,8 +1,7 @@
 <main>
     <h1>Admin tool</h1>
     <h2>Gallery view</h2>
-    <form action="">
-        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+    <form method="POST">
         <table>
             <tr>
                 <td>title</td>
@@ -30,7 +29,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button type="submit">Save</button>
+                    <input type="submit" name="save">
                 </td>
             </tr>
         </table>

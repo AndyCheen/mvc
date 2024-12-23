@@ -18,6 +18,10 @@ class User extends Controller
 
     public function create()
     {
+        if (!empty($_POST)) {
+            $model = new UserModel();
+            $model->save(array_intersect_key(array_filter($_POST), $model->to_array()));
+        }
         $this->adminView('user/create');
     }
 

@@ -11,13 +11,17 @@ class GalleryCategory extends Controller
     public function view()
     {
         $model = new GalleryCategoryModel();
-        $this->data = ['data' => $model->getAllGalleryCategory()];
+//        $this->data = ['data' => $model->getAllGalleryCategory()];
 
         $this->adminView('galleryCategory/view');
     }
 
     public function create()
     {
+        if (!empty($_POST)) {
+            $model = new GalleryCategoryModel();
+            $model->save(array_intersect_key($_POST, $model->to_array()));
+        }
         $this->adminView('galleryCategory/create');
     }
 

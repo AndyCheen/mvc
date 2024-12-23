@@ -2,22 +2,14 @@
 
 namespace App\models;
 
+use App\sql\Insert;
+
 class PostCategory
 {
-    private $postCategory = [
-        1 => [
-            'id' => 1,
-            'title' => 'Title 1'
-        ],
-        2 => [
-            'id' => 2,
-            'title' => 'Title 2'
-        ],
-        3 => [
-            'id' => 3,
-            'title' => 'Title 3'
-        ],
-    ];
+    public int $id;
+    public string $title;
+    public string $created;
+    public string $updated;
 
     public function getAllPostsCategory()
     {
@@ -31,5 +23,18 @@ class PostCategory
         }
 
         throw new \Exception('PostCategory not found');
+    }
+
+    public function save(array $data): void
+    {
+        $insert = new Insert();
+        $insert->setTableName('post_catrgory');
+        $insert->setData($data);
+        $insert->execute();
+    }
+
+    public function to_array()
+    {
+        return get_class_vars(get_class($this));
     }
 }
